@@ -1,0 +1,20 @@
+services:
+  food:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: 'lingyang/food'
+    ports:
+      - '8081:8081'
+    volumes:
+      - /etc/timezone:/etc/timezone
+      - /etc/localtime:/etc/localtime
+    networks:
+      - food_net
+    restart: always
+networks:
+  food_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: "192.168.11.0/24"
